@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     //Transform T_FollowCamera;
-    public GameObject Sphere;
+    public GameObject Cube;
 
     // Start is called before the first frame update
     void Start()
@@ -15,8 +15,7 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    { 
-        Vector3 newPos = new Vector3(Sphere.transform.position.x, 10, Sphere.transform.position.z);
-        transform.position = newPos;
+    {
+        
     }
 }

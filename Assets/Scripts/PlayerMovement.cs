@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(movementForce * playerSpeed);
 
 
-        Debug.Log("movementForce: " + movementForce);
     }
 
     private void Move_GameOBJ()
