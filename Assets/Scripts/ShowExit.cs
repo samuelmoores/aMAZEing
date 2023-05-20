@@ -22,7 +22,7 @@ public class ShowExit : MonoBehaviour
     void Update()
     {
         
-        if(Input.GetKeyUp(KeyCode.Space))
+        if(Input.GetKeyUp(KeyCode.E))
         {
 
 

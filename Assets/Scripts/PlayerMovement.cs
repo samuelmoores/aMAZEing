@@ -6,88 +6,43 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float playerSpeed = 5.0f;
-    public float rotateSpeed = 5.0f;
+    public float playerSpeed;
+    public float rotateSpeed;
+    public float jumpVelocity;
+    Rigidbody rb;
 
-    private Rigidbody rb;
-    private Vector3 movementForce;
+    private float vInput;
+    private float hInput;
+    private float jump;
+    private bool onGround;
 
-    float horizontal;
-    float vertical;
 
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        vertical = Input.GetAxis("Vertical");
-        horizontal = Input.GetAxis("Horizontal");
-
-        movementForce = new Vector3 (horizontal, 0, vertical);
-        //rb.velocity = movementForce * playerSpeed;
-
-       // Debug.Log("vertical: " + vertical);
-
+        vInput = Input.GetAxis("Vertical") * playerSpeed;
+        hInput = Input.GetAxis("Horizontal") * rotateSpeed;
+        jump = Input.GetAxis("Jump") * jumpVelocity;
     }
 
 
     private void FixedUpdate()
     {
-        //rb.velocity = movementForce * Time.deltaTime;
+        transform.Translate(Vector3.forward * vInput * Time.deltaTime);
 
-        rb.AddForce(movementForce * playerSpeed);
+        transform.Rotate(Vector3.up * hInput * Time.deltaTime);
 
+        rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
+        
 
     }
 
-    private void Move_GameOBJ()
-    {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.forward * playerSpeed * Time.deltaTime);
-
-
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.forward * -(playerSpeed * Time.deltaTime));
-
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Rotate(Vector3.up, rotateSpeed * Time.deltaTime);
-
-
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            transform.Rotate(Vector3.up, -rotateSpeed * Time.deltaTime);
-
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-
-            playerSpeed = (playerSpeed * 3);
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            playerSpeed = 5.0f;
-
-        }
-    }
 
 }
