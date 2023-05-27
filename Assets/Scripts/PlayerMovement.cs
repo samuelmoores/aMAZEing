@@ -39,8 +39,15 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Rotate(Vector3.up * hInput * Time.deltaTime);
 
-        rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
         
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "Ground")
+            rb.AddForce(Vector3.up * jump, ForceMode.Impulse);
 
     }
 
